@@ -49,14 +49,44 @@ public class Main {
     }
 
     private static void addNewAnimal() {
-        // ... логика добавления нового животного ...
+        System.out.println("Добавление нового животного.");
+        System.out.print("Введите тип животного (Cat/Dog/Hamster): ");
+        String type = scanner.nextLine();
+        System.out.print("Введите имя: ");
+        String name = scanner.nextLine();
+        System.out.print("Введите дату рождения (YYYY-MM-DD): ");
+        String birthDate = scanner.nextLine();
+
+        DomesticAnimal animal;
+        switch (type.toLowerCase()) {
+            case "cat":
+                animal = new Cat(name, birthDate);
+                break;
+            case "dog":
+                animal = new Dog(name, birthDate);
+                break;
+            case "hamster":
+                animal = new Hamster(name, birthDate);
+                break;
+            default:
+                System.out.println("Неподдерживаемый тип животного. Попробуйте снова.");
+                return;
+        }
+        registry.addPet(animal);
+        System.out.println("Животное добавлено: " + animal.getClass().getSimpleName() + " - Имя: " + name);
     }
 
     private static void printCommands() {
-        // ... логика вывода списка команд животного ...
+        System.out.print("Введите имя животного для отображения команд: ");
+        String name = scanner.nextLine();
+        registry.printAnimalCommands(name);
     }
 
     private static void teachCommand() {
-        // ... логика обучения животного новой команде ...
+        System.out.print("Введите имя животного для обучения новой команде: ");
+        String name = scanner.nextLine();
+        System.out.print("Введите команду для обучения: ");
+        String command = scanner.nextLine();
+        registry.teachAnimalCommand(name, command);
     }
 }
